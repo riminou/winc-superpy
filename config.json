@@ -1,0 +1,11 @@
+{
+    "version": "1.0.0",
+    "description" : "Configuratie bestand voor de superpy applicatie.",
+    "files" : {
+        "sold" : ".\\data\\sold.csv",
+        "bought" : ".\\data\\bought.csv",
+        "current_date" : ".\\data\\current_date.csv",
+        "export_folder" : ".\\data"
+    },
+    "date_format": "%Y-%m-%d"
+}
