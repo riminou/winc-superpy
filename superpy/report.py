@@ -179,13 +179,15 @@ def product_chart(chart_types:list,
                                        products=bought_products,
                                        start_date=start_date,
                                        end_date=end_date)
-        charts['Daily Cost'] = costs
+        if len(costs) > 0:
+            charts['Daily Cost'] = costs
     if 'revenue' in chart_types:
         revenues = get_daily_chart_values(chart_type='revenue',
                                           products=sold_products,
                                           start_date=start_date,
                                           end_date=end_date)
-        charts['Daily Revenue'] = revenues
+        if len(revenues) > 0:
+            charts['Daily Revenue'] = revenues
     if 'profit' in chart_types:
         profit_costs = get_daily_chart_values(chart_type='cost',
                                               products=bought_products,
@@ -197,16 +199,26 @@ def product_chart(chart_types:list,
                                                  end_date=end_date)
         profits = {}
         for date in profit_costs.keys():
-            cost = profit_costs[date]
-            revenue = profit_revenues[date]
+            if date in profit_costs.keys():
+                cost = profit_costs[date]
+            else:
+                cost = 0            
+            if date in profit_revenues.keys():
+                revenue = profit_revenues[date]
+            else:
+                revenue = 0
             profit = revenue - cost
             profits[date] = round(profit, 2)
-        charts['Daily Profits'] = profits
+        if len(profits) > 0:
+            charts['Daily Profits'] = profits
     if len(charts) > 0:
         for chart in charts.keys():
             x_values = list(charts[chart].keys())
             y_values = list(charts[chart].values())
-            plt.plot(x_values, y_values, label=chart)
+            if len(charts[chart]) <= 1:
+                plt.plot(x_values, y_values, 'o', label=chart)
+            else:
+                plt.plot(x_values, y_values, label=chart)
         plt.tick_params(axis='x', labelrotation=90)
         plt.xlabel('Dates')
         plt.ylabel('Amount')

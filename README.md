@@ -32,8 +32,8 @@ Installation of the superpy application is as follows:
 
 1. Create a python virtual environment and activate it:
 ```console
-> python -3.9 -m venv venv --prompt venv
-> python ./venv/Scripts/activate
+> py -3.9 -m venv venv --prompt venv
+> ./venv/Scripts/activate
 ```
 
 2. Install requirements file:
